@@ -1,13 +1,14 @@
 <?php
-/**
- * Plugin Name: FontX
- * Description: A lightweight and practical plugin for Persian fonts with !important applied styling.
- * Version: 1.0.0
- * Author: RezaEi.Ali
- * Author URI: https://ovan.dev/
- * Text Domain: fontx
- * Domain Path: /languages
- */
+/*
+Plugin Name: FontX
+Plugin URI: https://ovan.dev/
+Description: A lightweight and practical plugin for Persian fonts with !important applied styling.
+Version: 1.0.0
+Author: RezaEi.Ali
+Author URI: https://ovan.dev/
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+*/
 
 defined('ABSPATH') || exit;
 
