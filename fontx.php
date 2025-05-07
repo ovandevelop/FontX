@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: FontX
-Plugin URI: https://ovan.dev/
+Plugin URI: https://ovan.dev/FontX
 Description: A lightweight and practical plugin for Persian fonts with !important applied styling.
 Version: 1.0.0
-Author: RezaEi.Ali
+Author: Ovan Develop
 Author URI: https://ovan.dev/
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -22,8 +22,8 @@ add_action('wp_head', 'fontx_output_font_styles');
 
 function fontx_add_admin_menu() {
     add_menu_page(
-        __('FontX Settings', 'fontx'),
-        __('FontX', 'fontx'),
+        esc_html__('FontX Settings', 'fontx'),
+        esc_html__('FontX', 'fontx'),
         'manage_options',
         'fontx-settings',
         'fontx_settings_page_callback',
@@ -32,32 +32,34 @@ function fontx_add_admin_menu() {
 }
 
 function fontx_enqueue_admin_assets($hook) {
-    if ($hook !== 'toplevel_page_fontx-settings') return;
-    wp_enqueue_style('fontx-admin-style', FONTX_URL . 'assets/admin-style.css');
-}
+    if ($hook !== 'toplevel_page_fontx-settings') {
+        return;
+    }
 
-function fontx_load_textdomain() {
-    load_plugin_textdomain('fontx', false, dirname(plugin_basename(__FILE__)) . '/languages');
+    wp_enqueue_style('fontx-admin-style', FONTX_URL . 'assets/admin-style.css', [], '1.0.0');
 }
 
 require_once FONTX_DIR . 'admin/settings-page.php';
 
 function fontx_output_font_styles() {
     $selected_font = get_option('fontx_selected_font');
-    if (!$selected_font || $selected_font === '__default__') return;
+    
+    if (empty($selected_font) || $selected_font === '__default__') {
+        return;
+    }
 
     $woff = esc_url(FONTX_URL . 'fonts/' . $selected_font . '.woff');
     $woff2 = esc_url(FONTX_URL . 'fonts/' . $selected_font . '.woff2');
 
-    echo "<style>
-    @font-face {
-        font-family: 'FontX';
-        src: url('$woff2') format('woff2'),
-             url('$woff') format('woff');
+    echo '<style>';
+    echo '@font-face {
+        font-family: "FontX";
+        src: url("' . $woff2 . '") format("woff2"),
+             url("' . $woff . '") format("woff");
         font-display: swap;
     }
     * {
-        font-family: 'FontX' !important;
-    }
-    </style>";
+        font-family: "FontX" !important;
+    }';
+    echo '</style>';
 }
