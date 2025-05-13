@@ -17,7 +17,6 @@ define('FONTX_URL', plugin_dir_url(__FILE__));
 
 add_action('admin_menu', 'fontx_add_admin_menu');
 add_action('admin_enqueue_scripts', 'fontx_enqueue_admin_assets');
-add_action('init', 'fontx_load_textdomain');
 add_action('wp_head', 'fontx_output_font_styles');
 
 function fontx_add_admin_menu() {
