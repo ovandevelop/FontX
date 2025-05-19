@@ -17,7 +17,7 @@ define('FONTX_URL', plugin_dir_url(__FILE__));
 
 add_action('admin_menu', 'fontx_add_admin_menu');
 add_action('admin_enqueue_scripts', 'fontx_enqueue_admin_assets');
-add_action('wp_head', 'fontx_output_font_styles');
+add_action('wp_enqueue_scripts', 'fontx_output_font_styles');
 
 function fontx_add_admin_menu() {
     add_menu_page(
@@ -42,7 +42,7 @@ require_once FONTX_DIR . 'admin/settings-page.php';
 
 function fontx_output_font_styles() {
     $selected_font = get_option('fontx_selected_font');
-    
+
     if (empty($selected_font) || $selected_font === '__default__') {
         return;
     }
@@ -50,15 +50,19 @@ function fontx_output_font_styles() {
     $woff = esc_url(FONTX_URL . 'fonts/' . $selected_font . '.woff');
     $woff2 = esc_url(FONTX_URL . 'fonts/' . $selected_font . '.woff2');
 
-    echo '<style>';
-    echo '@font-face {
-        font-family: "FontX";
-        src: url("' . $woff2 . '") format("woff2"),
-             url("' . $woff . '") format("woff");
-        font-display: swap;
-    }
-    * {
-        font-family: "FontX" !important;
-    }';
-    echo '</style>';
+    $custom_css = "
+        @font-face {
+            font-family: 'FontX';
+            src: url('$woff2') format('woff2'),
+                 url('$woff') format('woff');
+            font-display: swap;
+        }
+        * {
+            font-family: 'FontX' !important;
+        }
+    ";
+
+    wp_register_style('fontx-inline-style', false);
+    wp_enqueue_style('fontx-inline-style');
+    wp_add_inline_style('fontx-inline-style', $custom_css);
 }
