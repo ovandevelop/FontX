@@ -21,8 +21,8 @@ add_action('wp_enqueue_scripts', 'fontx_output_font_styles');
 
 function fontx_add_admin_menu() {
     add_menu_page(
-        esc_html__('FontX Settings', 'fontx'),
-        esc_html__('FontX', 'fontx'),
+        esc_html__('FontX Settings', 'fontx-persian-fonts'),
+        esc_html__('FontX', 'fontx-persian-fonts'),
         'manage_options',
         'fontx-settings',
         'fontx_settings_page_callback',
