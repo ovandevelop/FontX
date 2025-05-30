@@ -3,7 +3,7 @@ defined('ABSPATH') || exit;
 
 function fontx_settings_page_callback() {
     if (!current_user_can('manage_options')) {
-        wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'fontx'));
+        wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'fontx-persian-fonts'));
     }
 
     $font_dir = FONTX_DIR . 'fonts/';
@@ -28,25 +28,25 @@ function fontx_settings_page_callback() {
 
             if ($font === '__default__') {
                 delete_option('fontx_selected_font');
-                echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('🔄 Plugin font has been disabled. Reverted to the theme default font.', 'fontx') . '</p></div>';
+                echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('🔄 Plugin font has been disabled. Reverted to the theme default font.', 'fontx-persian-fonts') . '</p></div>';
                 $current = '__default__';
             } elseif (in_array($font, $font_names, true)) {
                 update_option('fontx_selected_font', $font);
-                echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('✅ The selected font has been successfully applied.', 'fontx') . '</p></div>';
+                echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('✅ The selected font has been successfully applied.', 'fontx-persian-fonts') . '</p></div>';
                 $current = $font;
             }
         }
     }
 
     echo '<div class="wrap" style="text-align:center;font-size:20px;background-color:white;color:royalblue;padding:20px;border-radius:6px;">';
-    echo '<h1>' . esc_html__('FontX - By Ovan.Dev', 'fontx') . '</h1>';
+    echo '<h1>' . esc_html__('FontX - By Ovan.Dev', 'fontx-persian-fonts') . '</h1>';
     echo '<form method="post">';
     wp_nonce_field('fontx_save_font', 'fontx_nonce');
 
-    echo '<label for="fontx_font" dir="ltr">' . esc_html__('Select Font:', 'fontx') . '</label><br>';
+    echo '<label for="fontx_font" dir="ltr">' . esc_html__('Select Font:', 'fontx-persian-fonts') . '</label><br>';
     echo '<select style="width:400px !important;text-align:center;" name="fontx_font" id="fontx_font" required>';
 
-    echo '<option value="__default__"' . selected($current, '__default__', false) . '>' . esc_html__('— Use default font —', 'fontx') . '</option>';
+    echo '<option value="__default__"' . selected($current, '__default__', false) . '>' . esc_html__('— Use default font —', 'fontx-persian-fonts') . '</option>';
 
     foreach ($font_names as $font) {
         $selected = selected($current, $font, false);
@@ -54,7 +54,7 @@ function fontx_settings_page_callback() {
     }
 
     echo '</select>';
-    echo '<br><br><input type="submit" class="button button-primary" value="' . esc_attr__('Save', 'fontx') . '">';
+    echo '<br><br><input type="submit" class="button button-primary" value="' . esc_attr__('Save', 'fontx-persian-fonts') . '">';
     echo '</form>';
     echo '</div>';
 }
