@@ -1,6 +1,7 @@
 <?php
 /*
-Plugin Name: FontX
+Plugin Name: FontX Persian Fonts
+Requires at least: 5.0
 Plugin URI: https://ovan.dev/FontX
 Description: A lightweight and practical plugin for Persian fonts with !important applied styling.
 Version: 1.0.0
