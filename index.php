@@ -2,4 +2,3 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-?>
